@@ -11,4 +11,4 @@ jobs:
       with:
         username: 'mavanmanen'
         reponame: 'cod-camo-tracker'
-        token: ${{ secrets.GITHUB_TOKEN }} # Leave this line unchanged
+        token: ${{ secrets.GITHUB_TOKEN }}
