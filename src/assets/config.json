@@ -1,0 +1,259 @@
+{
+    "version": 1.1,
+    "games": [
+        {
+            "game": "MWII",
+            "supportedModes": [
+                {
+                    "name": "Multiplayer",
+                    "camos": [
+                        "Base",
+                        "Gold",
+                        "Platinum",
+                        "Polyatomic"
+                    ]
+                }
+            ],
+            "weaponTypes": [
+                {
+                    "type": "Assault Rifle",
+                    "weapons": [
+                        "M4",
+                        "M16",
+                        "TAQ-56",
+                        "Kastov 762",
+                        "Kastov 545",
+                        "Kastov-74u",
+                        "Lachmann-556",
+                        "STB 556",
+                        "M13B",
+                        "Chimera",
+                        "Tempus Razorback",
+                        "ISO Hemlock",
+                        "FR Avancer",
+                        "TR-76 Geist"
+                    ]
+                },
+                {
+                    "type": "Battle Rifle",
+                    "weapons": [
+                        "Lachmann-762",
+                        "SO-14",
+                        "TAQ-V",
+                        "FTac Recon",
+                        "Cronen Squall"
+                    ]
+                },
+                {
+                    "type": "SMG",
+                    "weapons": [
+                        "VEL 46",
+                        "PDSW 528",
+                        "Fennec 45",
+                        "MX9",
+                        "Lachmann Sub",
+                        "Vaznev-9K",
+                        "FSS Hurricane",
+                        "Minibak",
+                        "BAS-P",
+                        "ISO 45",
+                        "Lachmann Shroud",
+                        "ISO 9mm"
+                    ]
+                },
+                {
+                    "type": "Shotgun",
+                    "weapons": [
+                        "Bryson 800",
+                        "Expedite 12",
+                        "Lockwood 300",
+                        "Bryson 890",
+                        "KV Broadside",
+                        "MX Guardian"
+                    ]
+                },
+                {
+                    "type": "LMG",
+                    "weapons": [
+                        "SAKIN MG38",
+                        "RAAL MG",
+                        "HCR 56",
+                        "556 Icarus",
+                        "RPK",
+                        "RAPP H"
+                    ]
+                },
+                {
+                    "type": "Marksman Rifle",
+                    "weapons": [
+                        "EBR-14",
+                        "SP-R 208",
+                        "Lockwood Mk2",
+                        "LM-S",
+                        "SA-B 50",
+                        "TAQ-M",
+                        "Crossbow",
+                        "Tempus torrent"
+                    ]
+                },
+                {
+                    "type": "Sniper Rifle",
+                    "weapons": [
+                        "MCPR-300",
+                        "Signal 50",
+                        "LA-B 330",
+                        "SP-X 80",
+                        "Victus XMR",
+                        "FJX Imperium",
+                        "Carrack .300"
+                    ]
+                },
+                {
+                    "type": "Handgun",
+                    "weapons": [
+                        "P890",
+                        ".50 GS",
+                        "X12",
+                        "Basilisk",
+                        "X13 Auto",
+                        "FRAC Siege",
+                        "GS Magna",
+                        "9mm Daemon"
+                    ]
+                },
+                {
+                    "type": "Launcher",
+                    "weapons": [
+                        "PILA",
+                        "STRELA-P",
+                        "JOKR",
+                        "RPG-7"
+                    ]
+                },
+                {
+                    "type": "Melee",
+                    "weapons": [
+                        "Riot Shield",
+                        "Combat Knife",
+                        "Dual Kodachis",
+                        "Tonfa",
+                        "Pickaxe",
+                        "Dual Kamas"
+                    ]
+                }
+            ]
+        },
+        {
+            "game": "MWIII",
+            "supportedModes": [
+                {
+                    "name": "Multiplayer",
+                    "camos": [
+                        "Base",
+                        "Gilded",
+                        "Forged",
+                        "Priceless"
+                    ]
+                },
+                {
+                    "name": "Zombies",
+                    "camos": [
+                        "Base",
+                        "Golden Enigma",
+                        "Zircon Scale",
+                        "Serpentinite"
+                    ]
+                }
+            ],
+            "weaponTypes": [
+                {
+                    "type": "Assault Rifle",
+                    "weapons": [
+                        "SVA-545",
+                        "MTZ-556",
+                        "Holger 556",
+                        "MCW",
+                        "DG-58",
+                        "FR 5.56"
+                    ]
+                },
+                {
+                    "type": "Battle Rifle",
+                    "weapons": [
+                        "BAS-B",
+                        "Sidewinder",
+                        "MTZ-762"
+                    ]
+                },
+                {
+                    "type": "SMG",
+                    "weapons": [
+                        "Striker",
+                        "WSP Swarm",
+                        "AMR9",
+                        "WSP-9",
+                        "Rival-9",
+                        "Striker 9"
+                    ]
+                },
+                {
+                    "type": "Shotgun",
+                    "weapons": [
+                        "Lockwood 680",
+                        "Haymaker",
+                        "Riveter"
+                    ]
+                },
+                {
+                    "type": "LMG",
+                    "weapons": [
+                        "Pulemyot 762",
+                        "DG-58 LSW",
+                        "TAQ Eredicator",
+                        "Holger 26"
+                    ]
+                },
+                {
+                    "type": "Marksman Rifle",
+                    "weapons": [
+                        "KVD Enforcer",
+                        "MCW 6.8",
+                        "DM56",
+                        "MTZ Interceptor"
+                    ]
+                },
+                {
+                    "type": "Sniper Rifle",
+                    "weapons": [
+                        "KATT-AMR",
+                        "Longbow",
+                        "KV Inhibitor"
+                    ]
+                },
+                {
+                    "type": "Handgun",
+                    "weapons": [
+                        "COR-56",
+                        "Renetti",
+                        "Tyr",
+                        "WSP Stinger"
+                    ]
+                },
+                {
+                    "type": "Launcher",
+                    "weapons": [
+                        "RGL-80",
+                        "Stormender"
+                    ]
+                },
+                {
+                    "type": "Melee",
+                    "weapons": [
+                        "Gutter Knife",
+                        "Karambit"
+                    ]
+                }
+            ]
+        }
+    ]
+}
