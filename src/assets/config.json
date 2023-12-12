@@ -1,5 +1,5 @@
 {
-    "version": 1.4,
+    "version": 1.5,
     "games": [
         {
             "name": "MWII",
@@ -268,7 +268,8 @@
                         "Pulemyot 762",
                         "DG-58 LSW",
                         "TAQ Eredicator",
-                        "Holger 26"
+                        "Holger 26",
+                        "Bruen Mk9"
                     ]
                 },
                 {
