@@ -14,7 +14,7 @@ function formatCompletion(completionCount: { completed: number, total: number })
     <select v-model="state.selectedGameIndex">
       <option v-for="(game, index) in state.config.games" :value="index">{{ game.name }}</option>
     </select>
-    <select v-model="state.selectedModeIndex" :disabled="state.selectedGame.supportedModes.length == 1">
+    <select v-model="state.selectedModeIndex">
       <option v-for="(mode, index) in state.selectedGame.supportedModes" :value="index">{{ mode.name }}</option>
     </select>
     <table v-if="state.selectedMode">
