@@ -4,30 +4,6 @@ import { useDataStore } from '@/stores/data-store'
 const state = useDataStore()
 state.loadData()
 
-function getCamoTotalCompletionCount(camoType: string): string {
-  return formatCompletion(state.getCamoTotalCompletionCount(camoType))
-}
-
-function getCamoCompletionCount(weaponType: string, camoType: string): string {
-  return formatCompletion(state.getCamoCompletionCount(weaponType, camoType))
-}
-
-function getTotalMaxLevelCount(): string {
-  return formatCompletion(state.getTotalMaxLevelCount())
-}
-
-function getMaxLevelCount(weaponType: string): string {
-  return formatCompletion(state.getWeaponTypeMaxLevelCount(weaponType))
-}
-
-function getWeaponTypeCompletionCount(weaponType: string) {
-  return formatCompletion(state.getWeaponTypeCompletionCount(weaponType))
-}
-
-function getTotalCompleted() {
-  return formatCompletion(state.getTotalCompleted())
-}
-
 function formatCompletion(completionCount: { completed: number, total: number }) {
   return `${completionCount.completed}/${completionCount.total}`
 }
@@ -44,20 +20,20 @@ function formatCompletion(completionCount: { completed: number, total: number })
     <table v-if="state.selectedMode">
       <thead>
         <tr>
-          <th>Total completed: ({{ getTotalCompleted() }})</th>
-          <th>Max Lvl ({{ getTotalMaxLevelCount() }})</th>
+          <th>Total completed: ({{ formatCompletion(state.getTotalCompleted()) }})</th>
+          <th>Max Lvl ({{ formatCompletion(state.getTotalMaxLevelCount()) }})</th>
           <th v-for="camoType in state.camos" :key="camoType.name">
-            {{ camoType.name }} ({{ getCamoTotalCompletionCount(camoType.name) }})
+            {{ camoType.name }} ({{ formatCompletion(state.getCamoTotalCompletionCount(camoType.name)) }})
           </th>
         </tr>
       </thead>
       <template v-for="weaponType in state.weaponTypes" :key="weaponType[0]">
         <thead>
           <tr>
-            <th>{{ weaponType[0] }} ({{ getWeaponTypeCompletionCount(weaponType[0]) }})</th>
-            <th>Max Lvl ({{ getMaxLevelCount(weaponType[0]) }})</th>
+            <th>{{ weaponType[0] }} ({{ formatCompletion(state.getWeaponTypeCompletionCount(weaponType[0])) }})</th>
+            <th>Max Lvl ({{ formatCompletion(state.getWeaponTypeMaxLevelCount(weaponType[0])) }})</th>
             <th v-for="camoType in state.camos" :key="camoType.name">
-              {{ camoType.name }} ({{ getCamoCompletionCount(weaponType[0], camoType.name) }})</th>
+              {{ camoType.name }} ({{ formatCompletion(state.getCamoCompletionCount(weaponType[0], camoType.name)) }})</th>
           </tr>
         </thead>
         <tbody>
