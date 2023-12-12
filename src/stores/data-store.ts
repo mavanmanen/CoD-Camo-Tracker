@@ -88,7 +88,6 @@ export const useDataStore = defineStore('datastore', () => {
   }
 
   function getCamoTotalCompletionCount(camo: string) {
-    console.log(data.value)
     return {
       total: weapons.value.length,
       completed: weapons.value.filter(w => w.progress.get(selectedMode.value.name)!.get(camo)).length
