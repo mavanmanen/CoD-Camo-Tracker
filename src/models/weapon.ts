@@ -12,7 +12,7 @@ export class Weapon {
     this.progress = new Map<string, Map<string, boolean>>(supportedModes.map(sm => [
       sm.name,
       new Map<string, boolean>(
-        sm.camos.map(ct => [ct, false])
+        sm.camos.map(ct => [ct.name, false])
       )
     ]))
   }

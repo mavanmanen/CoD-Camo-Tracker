@@ -4,14 +4,19 @@ export interface Config {
 }
 
 export interface ConfigGame {
-  game: string
+  name: string
   supportedModes: ConfigSupportedMode[]
   weaponTypes: ConfigWeaponType[]
 }
 
 export interface ConfigSupportedMode {
   name: string
-  camos: string[]
+  camos: CamoConfig[]
+}
+
+export interface CamoConfig {
+  name: string
+  completedColour: string
 }
 
 export interface ConfigWeaponType {

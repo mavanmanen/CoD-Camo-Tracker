@@ -2,15 +2,27 @@
     "version": 1.1,
     "games": [
         {
-            "game": "MWII",
+            "name": "MWII",
             "supportedModes": [
                 {
                     "name": "Multiplayer",
                     "camos": [
-                        "Base",
-                        "Gold",
-                        "Platinum",
-                        "Polyatomic"
+                        {
+                            "name": "Base",
+                            "colour": "#027a02"
+                        },
+                        {
+                            "name": "Gold",
+                            "colour": "#FFC857"
+                        },
+                        {
+                            "name": "Platinum",
+                            "colour": "#C8D3D5"
+                        },
+                        {
+                            "name": "Polyatomic",
+                            "colour": "#4C2A85"
+                        }
                     ]
                 }
             ],
@@ -144,24 +156,48 @@
             ]
         },
         {
-            "game": "MWIII",
+            "name": "MWIII",
             "supportedModes": [
                 {
                     "name": "Multiplayer",
                     "camos": [
-                        "Base",
-                        "Gilded",
-                        "Forged",
-                        "Priceless"
+                        {
+                            "name": "Base",
+                            "colour": "#027a02"
+                        },
+                        {
+                            "name": "Gilded",
+                            "colour": "#FFC857"
+                        },
+                        {
+                            "name": "Forged",
+                            "colour": "#C8D3D5"
+                        },
+                        {
+                            "name": "Priceless",
+                            "colour": "#83C9F4"
+                        }
                     ]
                 },
                 {
                     "name": "Zombies",
                     "camos": [
-                        "Base",
-                        "Golden Enigma",
-                        "Zircon Scale",
-                        "Serpentinite"
+                        {
+                            "name": "Base",
+                            "colour": "#027a02"
+                        },
+                        {
+                            "name": "Golden Enigma",
+                            "colour": "#FFC857"
+                        },
+                        {
+                            "name": "Zircon Scale",
+                            "colour": "#DC136C"
+                        },
+                        {
+                            "name": "Serpentinite",
+                            "colour": "#5B9279"
+                        }
                     ]
                 }
             ],

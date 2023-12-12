@@ -9,7 +9,7 @@ export class DataRoot {
     
     this.progress = new Map<string, Map<string, Weapon[]>>(
       config.games.map(g => [
-        g.game,
+        g.name,
         new Map<string, Weapon[]>(
           g.weaponTypes.map(wt => [
             wt.type,
