@@ -79,15 +79,19 @@ function formatCompletion(completionCount: { completed: number, total: number })
 </template>
 
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
+
 * {
   box-sizing: border-box;
 }
 
 html,
 body {
+  font-family: 'Roboto', sans-serif;
   margin: 0;
   padding: 0;
   background-color: black;
+  font-size: 12px;
 }
 
 table {
@@ -99,11 +103,21 @@ table {
     text-align: left;
     height: 1.4rem;
     border: solid 1px black;
+    padding: 5px 10px;
   }
 
   thead {
+    font-size: 1.2rem;
     background-color: black;
     color: white;
+
+    th {
+      &:first-child {
+        text-align: left;
+      }
+
+      text-align: center;
+    }
   }
 
   tr {
