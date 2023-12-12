@@ -16,7 +16,7 @@ export interface ConfigSupportedMode {
 
 export interface CamoConfig {
   name: string
-  completedColour: string
+  colour: string
 }
 
 export interface ConfigWeaponType {
