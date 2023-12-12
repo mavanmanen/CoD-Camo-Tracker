@@ -1,5 +1,5 @@
 {
-    "version": 1.1,
+    "version": 1.2,
     "games": [
         {
             "name": "MWII",
@@ -22,6 +22,27 @@
                         {
                             "name": "Polyatomic",
                             "colour": "#4C2A85"
+                        }
+                    ]
+                },
+                {
+                    "name": "Zombies",
+                    "camos": [
+                        {
+                            "name": "Base",
+                            "colour": "#027a02" 
+                        },
+                        {
+                            "name": "Golden Ivory",
+                            "colour": "#E7E7E7"
+                        },
+                        {
+                            "name": "Spinel Husk",
+                            "colour": "#2A0800"
+                        },
+                        {
+                            "name": "Arachnida",
+                            "colour": "#332E3C"
                         }
                     ]
                 }

@@ -57,7 +57,13 @@ export const useDataStore = defineStore('datastore', () => {
         for(const weaponType of game.weaponTypes) {
           if(data.value.progress.get(game.name)!.has(weaponType.type)) {
             for(const weapon of weaponType.weapons) {
-              if(!data.value.progress.get(game.name)!.get(weaponType.type)!.find(w => w.name == weapon)) {
+              if(data.value.progress.get(game.name)!.get(weaponType.type)!.find(w => w.name == weapon)) {
+                for(const gameMode of game.supportedModes) {
+                  if(!data.value.progress.get(game.name)!.get(weaponType.type)?.find(w => w.name == weapon)!.progress.has(gameMode.name)) {
+                    data.value.progress.get(game.name)!.get(weaponType.type)?.find(w => w.name == weapon)!.progress.set(gameMode.name, new Map<string, boolean>(gameMode.camos.map(c => [c.name, false])))
+                  }
+                }
+              } else {
                 data.value.progress.get(game.name)!.get(weaponType.type)!.push(new Weapon(weapon, game.supportedModes))
               }
             }
@@ -77,9 +83,12 @@ export const useDataStore = defineStore('datastore', () => {
         ))
       }
     }
+
+    data.value.version = config.value.version
   }
 
   function getCamoTotalCompletionCount(camo: string) {
+    console.log(data.value)
     return {
       total: weapons.value.length,
       completed: weapons.value.filter(w => w.progress.get(selectedMode.value.name)!.get(camo)).length
