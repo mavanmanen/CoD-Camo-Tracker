@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useDataStore } from '@/stores/data-store'
-import { stringify } from 'querystring';
+import { ref } from 'vue'
 
 const state = useDataStore()
 state.loadData()
@@ -31,6 +31,16 @@ function importJson(event: any) {
   reader.readAsText(file)
 }
 
+const hoveredColumn = ref(-1)
+
+function columnHover(column: number) {
+  hoveredColumn.value = column
+}
+
+function isHovered(column: number) {
+  return hoveredColumn.value == column
+}
+
 </script>
 
 <template>
@@ -55,9 +65,9 @@ function importJson(event: any) {
     <table v-if="state.selectedMode">
       <thead>
         <tr>
-          <th>Total completed: ({{ formatCompletion(state.getTotalCompleted()) }})</th>
-          <th>Max Lvl ({{ formatCompletion(state.getTotalMaxLevelCount()) }})</th>
-          <th v-for="camoType in state.camos" :key="camoType.name">
+          <th >Total completed: ({{ formatCompletion(state.getTotalCompleted()) }})</th>
+          <th @mouseover="columnHover(0)" :class="(isHovered(0) ? 'hovered' : '')">Max Lvl ({{ formatCompletion(state.getTotalMaxLevelCount()) }})</th>
+          <th @mouseover="columnHover(index + 1)" :class="(isHovered(index + 1) ? 'hovered' : '')" v-for="(camoType, index) in state.camos" :key="camoType.name">
             {{ camoType.name }} ({{ formatCompletion(state.getCamoTotalCompletionCount(camoType.name)) }})
           </th>
         </tr>
@@ -66,8 +76,8 @@ function importJson(event: any) {
         <thead @click="state.toggleCategory(index)">
           <tr>
             <th>{{ weaponType[0] }} ({{ formatCompletion(state.getWeaponTypeCompletionCount(weaponType[0])) }})</th>
-            <th>Max Lvl ({{ formatCompletion(state.getWeaponTypeMaxLevelCount(weaponType[0])) }})</th>
-            <th v-for="camoType in state.camos" :key="camoType.name">
+            <th @mouseover="columnHover(0)" :class="(isHovered(0) ? 'hovered' : '')">Max Lvl ({{ formatCompletion(state.getWeaponTypeMaxLevelCount(weaponType[0])) }})</th>
+            <th @mouseover="columnHover(index + 1)" :class="(isHovered(index + 1) ? 'hovered' : '')" v-for="(camoType, index) in state.camos" :key="camoType.name">
               {{ camoType.name }} ({{ formatCompletion(state.getCamoCompletionCount(weaponType[0], camoType.name)) }})
             </th>
           </tr>
@@ -76,13 +86,15 @@ function importJson(event: any) {
           <tr :class="state.getWeaponCompleted(weaponType[0], weapon.name) ? 'completed' : ''"
             v-for="weapon in weaponType[1]" :key="weapon.name">
             <td>{{ weapon.name }}</td>
-            <td class="check-cell" style="--completion-colour: #027a02;" :class="weapon.maxLvl ? 'completed' : ''"
-              @click="state.toggleMaxLevel(weaponType[0], weapon.name)" title="Max Lvl"></td>
+            <td class="check-cell" style="--completion-colour: #027a02;" :class="(weapon.maxLvl ? 'completed' : '') + ' ' + (isHovered(0) ? 'hovered' : '')"
+              @click="state.toggleMaxLevel(weaponType[0], weapon.name)" title="Max Lvl"
+              @mouseover="columnHover(0)"></td>
             <td class="check-cell" :style="'--completion-colour: ' + state.getCompletionColour(camoCompletion[0]) + ';'"
-              :class="camoCompletion[1] ? 'completed' : ''"
-              v-for="camoCompletion in weapon.progress.get(state.selectedMode?.name)" :key="camoCompletion[0]"
+              :class="(camoCompletion[1] ? 'completed' : '') + ' ' + (isHovered(index + 1) ? 'hovered' : '')"
+              v-for="(camoCompletion, index) in weapon.progress.get(state.selectedMode?.name)" :key="camoCompletion[0]"
               @click="state.toggleCamoCompletion(weaponType[0], weapon.name, camoCompletion[0])"
-              :title="camoCompletion[0]"></td>
+              :title="camoCompletion[0]"
+              @mouseover="columnHover(index + 1)"></td>
           </tr>
         </tbody>
       </template>
@@ -109,7 +121,7 @@ body {
 table {
   width: 100%;
   border-collapse: collapse;
-
+  
   th,
   td {
     text-align: left;
@@ -118,14 +130,27 @@ table {
     padding: 5px 10px;
   }
 
+  td.hovered {
+    opacity: 0.8;
+  }
+
+  th.hovered {
+    color: white;
+  }
+
+  td:not(:first-child):hover {
+    opacity: 0.5 !important;
+  }
+
   thead {
     font-size: 1.2rem;
     background-color: black;
-    color: white;
+    color: rgb(165, 165, 165);
 
     th {
       &:first-child {
         text-align: left;
+        color: white;
       }
 
       text-align: center;
