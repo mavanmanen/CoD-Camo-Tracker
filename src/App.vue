@@ -25,9 +25,7 @@ function importJson(event: any) {
   const reader = new FileReader()
 
   reader.onload = e => {
-    if(e.target && typeof e.target.result == typeof String) {
-      state.importJson(e.target.result as string)
-    }
+    state.importJson(e.target!.result as string)
   }
 
   reader.readAsText(file)
