@@ -49,6 +49,7 @@ function importJson(event: any) {
       <input type="file" accept="application/json" id="import-file-input" @change="importJson" style="display: none;">
 
       <a href="https://github.com/mavanmanen/cod-camo-tracker/blob/main/patchnotes.md">Patchnotes</a>
+      <a href="https://github.com/mavanmanen/cod-camo-tracker">Source Code (GitHub)</a>
     </div>
 
     <table v-if="state.selectedMode">
