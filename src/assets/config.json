@@ -1,5 +1,5 @@
 {
-    "version": 1.5,
+    "version": 1.6,
     "games": [
         {
             "name": "MWII",
@@ -64,7 +64,8 @@
                         "Tempus Razorback",
                         "ISO Hemlock",
                         "FR Avancer",
-                        "TR-76 Geist"
+                        "TR-76 Geist",
+                        "M13C"
                     ]
                 },
                 {

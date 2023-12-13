@@ -11,6 +11,7 @@ export const useDataStore = defineStore('datastore', () => {
   const selectedGameIndex = ref(0)
   const selectedModeIndex = ref(0)
   const data = ref<DataRoot>()
+  const toggleStates = ref<Map<number, boolean>>()
 
   // Getters
   const selectedGame = computed(() => config.value.games[selectedGameIndex.value])
@@ -25,6 +26,7 @@ export const useDataStore = defineStore('datastore', () => {
 
     if(raw == null) {
       data.value = new DataRoot(config.value)
+      loaded()
       return
     }
 
@@ -44,6 +46,23 @@ export const useDataStore = defineStore('datastore', () => {
 
     if(data.value.version < config.value.version) {
       upgradeData()
+    }
+
+    loaded()
+  }
+
+  function loaded() {
+    toggleStates.value = new Map<number, boolean>([...weaponTypes.value.keys()!].map((_, index) => [index, false]))
+  }
+
+  function toggleCategory(index: number) {
+    const currentValue = toggleStates.value!.get(index)
+    toggleStates.value!.set(index, !currentValue)
+  }
+
+  function resetToggleStates() {
+    for(var kv of toggleStates.value!) {
+      toggleStates.value!.set(kv[0], false)
     }
   }
 
@@ -181,12 +200,16 @@ export const useDataStore = defineStore('datastore', () => {
     }))
   }, { deep: true })
 
+  watch(selectedGameIndex, resetToggleStates)
+  watch(selectedModeIndex, resetToggleStates)
+
   return {
     // State
     config,
     selectedGameIndex,
     selectedModeIndex,
     data,
+    toggleStates,
 
     // Getters
     selectedGame,
@@ -205,6 +228,7 @@ export const useDataStore = defineStore('datastore', () => {
     toggleMaxLevel,
     getCompletionColour,
     getWeaponTypeCompletionCount,
-    getTotalCompleted
+    getTotalCompleted,
+    toggleCategory
   }
 })

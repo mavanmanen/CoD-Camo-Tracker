@@ -7,6 +7,8 @@ state.loadData()
 function formatCompletion(completionCount: { completed: number, total: number }) {
   return `${completionCount.completed}/${completionCount.total}`
 }
+
+
 </script>
 
 <template>
@@ -27,8 +29,8 @@ function formatCompletion(completionCount: { completed: number, total: number })
           </th>
         </tr>
       </thead>
-      <template v-for="weaponType in state.weaponTypes" :key="weaponType[0]">
-        <thead>
+      <template v-for="(weaponType, index) in state.weaponTypes" :key="weaponType[0]">
+        <thead @click="state.toggleCategory(index)">
           <tr>
             <th>{{ weaponType[0] }} ({{ formatCompletion(state.getWeaponTypeCompletionCount(weaponType[0])) }})</th>
             <th>Max Lvl ({{ formatCompletion(state.getWeaponTypeMaxLevelCount(weaponType[0])) }})</th>
@@ -36,7 +38,7 @@ function formatCompletion(completionCount: { completed: number, total: number })
               {{ camoType.name }} ({{ formatCompletion(state.getCamoCompletionCount(weaponType[0], camoType.name)) }})</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody :class="state.toggleStates?.get(index) ? 'hidden' : ''">
           <tr :class="state.getWeaponCompleted(weaponType[0], weapon.name) ? 'completed' : ''"
             v-for="weapon in weaponType[1]" :key="weapon.name">
             <td>{{ weapon.name }}</td>
@@ -106,6 +108,10 @@ table {
         opacity: 0.8;
       }
     }
+  }
+
+  tbody.hidden {
+    display: none;
   }
 
   .check-cell {
