@@ -1,2 +1,6 @@
+#### 13/12/2023
+- Add patchnotes link
+- Add JSON import/export functionality
+
 #### 12/12/2023
-Release
+- Release

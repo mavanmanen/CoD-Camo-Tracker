@@ -21,6 +21,27 @@ export const useDataStore = defineStore('datastore', () => {
   const weapons = computed(() => [...weaponTypes.value.values()].flatMap(w => w))
 
   // Actions
+  function replacer(key: string, value: any) {
+    if(value instanceof Map) {
+      return { 
+        dataType: 'Map',
+        value: [...value]
+      }
+    }
+  
+    return value
+  }
+
+  function reviver(key: string, value: any) {
+    if(typeof value === 'object' && value !== null) {
+      if(value.dataType === 'Map') {
+        return new Map(value.value)
+      }
+    }
+  
+    return value
+  }
+
   function loadData() {
     const raw = localStorage.getItem(dataKey)
 
@@ -29,16 +50,12 @@ export const useDataStore = defineStore('datastore', () => {
       loaded()
       return
     }
-
-    data.value = JSON.parse(raw, (key: string, value: any) => {
-      if(typeof value === 'object' && value !== null) {
-        if(value.dataType === 'Map') {
-          return new Map(value.value)
-        }
-      }
     
-      return value
-    })
+    loadJson(raw)
+  }
+
+  function loadJson(json: string) {
+    data.value = JSON.parse(json, reviver)
 
     if(!data.value) {
       return
@@ -68,6 +85,10 @@ export const useDataStore = defineStore('datastore', () => {
 
   function upgradeData() {
     if(!data.value) {
+      return
+    }
+
+    if(data.value.version >= config.value.version) {
       return
     }
 
@@ -182,22 +203,21 @@ export const useDataStore = defineStore('datastore', () => {
     }
   }
 
+  function getDataAsJson() {
+    return JSON.stringify(data.value, replacer)
+  }
+
+  function importJson(data: string) {
+    loadJson(data)
+  }
+
   // Watchers
   watch(selectedGameIndex, () => {
     selectedModeIndex.value = 0
   })
 
   watch(data, () => {
-    localStorage.setItem(dataKey, JSON.stringify(data.value, (key: string, value: any) => {
-      if(value instanceof Map) {
-        return { 
-          dataType: 'Map',
-          value: [...value]
-        }
-      }
-    
-      return value
-    }))
+    localStorage.setItem(dataKey, JSON.stringify(data.value, replacer))
   }, { deep: true })
 
   watch(selectedGameIndex, resetToggleStates)
@@ -229,6 +249,8 @@ export const useDataStore = defineStore('datastore', () => {
     getCompletionColour,
     getWeaponTypeCompletionCount,
     getTotalCompleted,
-    toggleCategory
+    toggleCategory,
+    getDataAsJson,
+    importJson
   }
 })

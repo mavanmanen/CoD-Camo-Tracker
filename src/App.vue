@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useDataStore } from '@/stores/data-store'
+import { stringify } from 'querystring';
 
 const state = useDataStore()
 state.loadData()
@@ -8,17 +9,50 @@ function formatCompletion(completionCount: { completed: number, total: number })
   return `${completionCount.completed}/${completionCount.total}`
 }
 
+function exportJson() {
+  const data = state.getDataAsJson()
+  const element = document.createElement('a')
+  element.setAttribute('href', `data:application/json;charset=utf-8, ${encodeURIComponent(data)}`)
+  element.setAttribute('download', 'cod-camo-tracker-export.json')
+  element.style.display = 'none'
+  document.body.appendChild(element)
+  element.click()
+  document.body.removeChild(element)
+}
+
+function importJson(event: any) {
+  const file = event.target.files[0]
+  const reader = new FileReader()
+
+  reader.onload = e => {
+    if(e.target && typeof e.target.result == typeof String) {
+      state.importJson(e.target.result as string)
+    }
+  }
+
+  reader.readAsText(file)
+}
 
 </script>
 
 <template>
   <div>
-    <select v-model="state.selectedGameIndex">
-      <option v-for="(game, index) in state.config.games" :value="index">{{ game.name }}</option>
-    </select>
-    <select v-model="state.selectedModeIndex">
-      <option v-for="(mode, index) in state.selectedGame.supportedModes" :value="index">{{ mode.name }}</option>
-    </select>
+    <div id="toolbar">
+      <select v-model="state.selectedGameIndex">
+        <option v-for="(game, index) in state.config.games" :value="index">{{ game.name }}</option>
+      </select>
+
+      <select v-model="state.selectedModeIndex">
+        <option v-for="(mode, index) in state.selectedGame.supportedModes" :value="index">{{ mode.name }}</option>
+      </select>
+
+      <button @click="exportJson">Export JSON</button>
+      <button onclick="document.getElementById('import-file-input').click()">Import JSON</button>
+      <input type="file" accept="application/json" id="import-file-input" @change="importJson" style="display: none;">
+
+      <a href="https://github.com/mavanmanen/cod-camo-tracker/blob/main/patchnotes.md">Patchnotes</a>
+    </div>
+
     <table v-if="state.selectedMode">
       <thead>
         <tr>
@@ -35,7 +69,8 @@ function formatCompletion(completionCount: { completed: number, total: number })
             <th>{{ weaponType[0] }} ({{ formatCompletion(state.getWeaponTypeCompletionCount(weaponType[0])) }})</th>
             <th>Max Lvl ({{ formatCompletion(state.getWeaponTypeMaxLevelCount(weaponType[0])) }})</th>
             <th v-for="camoType in state.camos" :key="camoType.name">
-              {{ camoType.name }} ({{ formatCompletion(state.getCamoCompletionCount(weaponType[0], camoType.name)) }})</th>
+              {{ camoType.name }} ({{ formatCompletion(state.getCamoCompletionCount(weaponType[0], camoType.name)) }})
+            </th>
           </tr>
         </thead>
         <tbody :class="state.toggleStates?.get(index) ? 'hidden' : ''">
@@ -125,5 +160,15 @@ table {
   tr.completed td:first-child {
     background-color: #027a02;
   }
+}
+
+a {
+  color: white;
+}
+
+#toolbar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 </style>
